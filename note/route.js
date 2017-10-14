@@ -5,15 +5,23 @@ const router = require('../lib/router.js');
 
 let notes = {};
 
-// router.post('/api/notes', (req,res) => {
-//
-//     res.writeHead(404, {'Content-Type': 'text/plain'});
-//
-//     // 400 when?
-//     // Save the note to the stack
-//     // Send 200
-//
-// });
+router.POST('/api/notes', (req,res) => {
+//pass data as stringifed JSON in the body of a POST request to create a new resource
+    if(!req.body) {
+        res.writeHead(400, {'Content-Type': 'text/plain'});
+        res.write('No content found.');
+        res.end();
+    } else {
+        res.writeHead(200, {'Content-Type': 'text/plain'});
+        res.write(`Found content: ${req.body}`);
+        new Note;
+        res.end();
+    }
+    // 400 when?
+    // Save the note to the stack
+    // Send 200
+
+});
 //
 // router.delete('/api/notes', (req,res) => {
 //     // Do I have an id?
