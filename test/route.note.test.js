@@ -1,54 +1,53 @@
 /*global beforeAll,afterAll,expect*/
 'use strict';
 
-process.env.PORT = 5500;
 const server = require("../lib/server");
 const superagent = require("superagent");
+require('dotenv').config();
 
-describe("api/notes", function() {
+describe('Testing Lab 8 POST', () => {
+    before((done) => {
+        server.start(process.env.PORT || 5000, done);
+    });
 
-    beforeAll(server.start);
-    afterAll(server.stop);
+    after((done) => {
+        server.stop();
+        done();
+    });
 
-    describe("POST /api/notes", () => {
+    it('', () => {
 
-        test('should respond with a 200', () =>{
-           return superagent.post('http://localhost:5500/api/notes')
-            .set("Content-Type", "application/json")
-            .send({
-                title:"hello world",
-                content: "this is my first note"
-            })
-            .then(res=>{
-                expect(res.status).toEqual(200);
-                expect(res.body.title).toEqual('hello world');
-                expect(res.body.content).toEqual('this is my first note');
-            })
-        });
+    });
 
-        test('should respond with a 400', () =>{
-           return superagent.post('http://localhost:5500/api/notes')
-            .set("Content-Type", "application/json")
-            .send({
-                content: "this is my first note"
-            })
-            .then(Promise.reject)
-            .catch(res=>{
-                expect(res.status).toEqual(400);
-            })
-        });
+});
 
-        test('should respond with a 400', () =>{
-           return superagent.post('http://localhost:5500/api/notes')
-            .set("Content-Type", "application/json")
-            .send({
-                title: "my title"
-            })
-            .then(Promise.reject)
-            .catch(res=>{
-                expect(res.status).toEqual(400);
-            })
-        });
+describe('Testing Lab 8 GET', () => {
+    before((done) => {
+        server.start(process.env.PORT || 5000, done);
+    });
+
+    after((done) => {
+        server.stop();
+        done();
+    });
+
+    it('', () => {
+
+    });
+
+});
+
+describe('Testing Lab 8 DELETE', () => {
+    before((done) => {
+        server.start(process.env.PORT || 5000, done);
+    });
+
+    after((done) => {
+        server.stop();
+        done();
+    });
+
+    it('', () => {
 
     });
 
