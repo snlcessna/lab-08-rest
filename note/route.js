@@ -38,26 +38,6 @@ router.DELETE('/api/notes', (req,res) => {
         res.end();
     }
 
-    // if (req.url.query['uuid'].length > 0) {
-    //     if (typeof notes[req.url.query['uuid']] === 'undefined') {
-    //         res.writeHead(404, {'Content-Type': 'text/plain'});
-    //         res.write('Note not found. Please try another uuid');
-    //         res.end();
-    //     } else {
-    //         notes[req.url.query['uuid']] = null;
-    //         delete notes[req.url.query['uuid']];
-    //         res.writeHead(200, {'Content-Type': 'text/plain'});
-    //         res.write('Note Deleted');
-    //         res.end();
-    //     }
-        
-    // } else {
-    //     res.writeHead(400, {'Content-Type': 'text/plain'});
-    //     res.write('Please enter an uuid with your POST request');
-    //     res.end();
-    // }
-
-    res.end();
 
 });
 //
