@@ -1,7 +1,7 @@
 'use strict';
 
-const Note = require('../note/router.js');
-const router = require('../lib/router.js').routeHandlers;
+const Note = require('../note/model.js');
+const router = require('../lib/router.js');
 
 let notes = {};
 
@@ -39,8 +39,9 @@ let notes = {};
 //
 // });
 
-router.get('/api/notes', (req,res) => {
-  
+router.GET('/', (req,res) => {
+  res.write('You got through');
+  res.end();
     // If we have an id
         // try and pull it from the stack
             // send it
@@ -49,3 +50,5 @@ router.get('/api/notes', (req,res) => {
     // List all
 
 });
+
+module.exports = router;
