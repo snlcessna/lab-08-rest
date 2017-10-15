@@ -48,26 +48,33 @@ router.DELETE('/api/notes', (req,res) => {
 
 
 });
-//
-// router.put('/api/notes', (req,res) => {
-//     // Do I have an id?
-//     // Is it valid
-//     // Replace it
-//     // Send 200 if all is well
-//
-// });
-//
-// router.patch('/api/notes', (req,res) => {
-//     // Do I have an id?
-//     // Is it valid
-//     // Update it
-//     // Send 200 if all is well
-//
-// });
 
-router.GET('/', (req,res) => {
-    res.write('You got through');
-    res.end();
+router.GET('/api/notes', (req,res) => {
+  parser(req);
+    if (Object.keys(req.url.query).length > 0) {
+      if(typeof notes[req.url.query['uuid']] === 'undefined'){
+        res.writeHead(404, {'Content-Type': 'text/plain'});
+        res.write('Note not found')
+        res.end();
+    } else {
+      res.writeHead(200, {'Content-Type': 'text/plain'});
+      res.write(notes[req.url.query['uuid']]);
+      res.end();
+    }
+  } else {
+      //if no query exists, send all responses
+      if(Object.keys(notes).length > 0){
+        for (var note in notes) {
+          res.writeHead(200, {'Content-Type': 'text/plain'});
+          res.write(notes.note);
+        }
+      }else{
+        res.writeHead(400, {'Content-Type': 'text/plain'});
+        res.write('You do not have any notes');
+        res.end();
+      }
+      res.end();
+  }
     // If we have an id
     // try and pull it from the stack
     // send it
