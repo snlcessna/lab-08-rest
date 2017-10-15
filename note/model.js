@@ -4,13 +4,11 @@ const uuid = require("uuid/v1");
 
 class Note {
 
-    constructor(title, content, name) {
+    constructor(content) {
       this.id = uuid();
 
-      this.title = title;
       this.date = new Date();
       this.content = content;
-      this.name = name;
 
     }
 

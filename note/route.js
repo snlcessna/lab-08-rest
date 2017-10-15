@@ -7,16 +7,24 @@ let notes = {};
 
 router.POST('/api/notes', (req,res) => {
 //pass data as stringifed JSON in the body of a POST request to create a new resource
-    if(!req.body) {
-        res.writeHead(400, {'Content-Type': 'text/plain'});
-        res.write('No content found.');
-        res.end();
-    } else {
-        res.writeHead(200, {'Content-Type': 'text/plain'});
-        res.write(`Found content: ${req.body}`);
-        new Note;
-        res.end();
-    }
+    parser(req).then(req => {
+    // console.log(req.body);
+    // console.log('parser:', req.body);
+        if(!req.body.content) {
+            res.writeHead(400, {'Content-Type': 'text/plain'});
+            res.write('No title, no content and no name found.');
+            res.end();
+        } else {
+            res.writeHead(200, {'Content-Type': 'text/plain'});
+            res.write(`Found content: ${req.body}`);
+            let newNote = new Note(req.body.content);
+            notes[newNote.uuid] = newNote;
+            console.log(notes);
+            res.end();
+        }}
+
+    );
+
     // 400 when?
     // Save the note to the stack
     // Send 200
