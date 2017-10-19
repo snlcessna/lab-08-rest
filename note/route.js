@@ -4,7 +4,7 @@ const Note = require('../note/model.js');
 const router = require('../lib/router.js');
 const parser = require('../lib/parse-request');
 const sendMessage = require('../lib/sendMessage.js');
-let notes = {};
+let notes = {'123': 'postit'};
 
 router.POST('/api/notes', (req,res) => {
 //pass data as stringifed JSON in the body of a POST request to create a new resource
@@ -48,7 +48,7 @@ router.GET('/api/notes', (req,res) => {
             for (var note in notes) {
                 //sendMessage() does not apply here
                 res.writeHead(200, {'Content-Type': 'text/plain'});
-                res.write(notes.note);
+                res.write(notes[note]);
             }
         }else{
             sendMessage(res, 400, 'You do not have any notes');

@@ -34,9 +34,30 @@ describe('Testing Lab 8 GET', () => {
         done();
     });
 
-    it('', () => {
-
+    it('If they did not pass a query, it should tell the user if there are no notes', (done) => {
+      request.get('localhost:3000/api/notes').end(function(err, res) {
+        if(res.status == 400) {
+          expect(res.text).toEqual('You do not have any notes');//self-explanatory
+        } else {
+          expect(res.text).toEqual('postit'); //If user doesn't enter query, we're logging every note; that is what this represents
+        } done();
+      });
     });
+
+    it('If the user does pass a query, it should return it to the user', (done) => {
+      request.get('localhost:3000/api/notes?uuid=123').end(function(err, res) {
+        expect(res.text).toEqual('postit');
+        done();
+      });
+    });
+
+    it('If the user requests an id that does not exist it should return an error message to the user', (done) => {
+      request.get('localhost:3000/api/notes?uuid=234').end(function(err, res) {
+        expect(res.text).toEqual('Note not found');
+        done();
+      });
+    });
+
 
 });
 
